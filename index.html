@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+  </head>
+  <style>
+    h2 {
+      font-size: 36px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h2>Demo Application</h2>
+
+    <script type="text/javascript">
+      document.getElementById("openInAppLink").onclick = function (event) {
+        event.preventDefault();
+
+        var appScheme = "xkdemo://xinku78.github.io/demo";
+        var fallbackUrl = "./app-release.apk"; // Replace with your app's Play Store URL
+        var timeout;
+
+        // Function to check if the app is installed
+        var checkIfInstalled = function () {
+          // Create an invisible iframe to attempt to load the custom URL scheme
+          var iframe = document.createElement("iframe");
+          iframe.style.border = "none";
+          iframe.style.width = "1px";
+          iframe.style.height = "1px";
+          iframe.style.position = "absolute";
+          iframe.style.top = "0";
+          iframe.style.left = "0";
+          iframe.src = appScheme;
+
+          // Append the iframe to the body
+          document.body.appendChild(iframe);
+
+          // Remove the iframe after a short delay
+          window.setTimeout(function () {
+            document.body.removeChild(iframe);
+          }, 1000);
+        };
+
+        // Function to handle the fallback
+        var handleFallback = function () {
+          window.location.href = fallbackUrl;
+        };
+
+        // Set the timeout for the fallback action
+        timeout = setTimeout(handleFallback, 1500); // Adjust the timeout value if needed
+
+        // Attempt to open the app
+        checkIfInstalled();
+
+        // Clear the timeout if the app is opened successfully
+        window.onblur = function () {
+          clearTimeout(timeout);
+        };
+      };
+    </script>
+  </body>
+</html>
