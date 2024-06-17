@@ -32,23 +32,7 @@
 
             // Function to check if the app is installed
             var checkIfInstalled = function () {
-                // Create an invisible iframe to attempt to load the custom URL scheme
-                var iframe = document.createElement("iframe");
-                iframe.style.border = "none";
-                iframe.style.width = "1px";
-                iframe.style.height = "1px";
-                iframe.style.position = "absolute";
-                iframe.style.top = "0";
-                iframe.style.left = "0";
-                iframe.src = appScheme;
-
-                // Append the iframe to the body
-                document.body.appendChild(iframe);
-
-                // Remove the iframe after a short delay
-                window.setTimeout(function () {
-                    document.body.removeChild(iframe);
-                }, 1000);
+                window.location.href = appScheme; // Attempt to open the app directly
             };
 
             // Function to handle the fallback
