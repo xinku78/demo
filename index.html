@@ -10,17 +10,25 @@
       font-size: 36px;
       text-align: center;
     }
+    #msg {
+      font-size: 18px;
+      text-align: center;
+      color: red;
+      font-weight: 700;
+    }
   </style>
   <body>
     <h2>Demo Application</h2>
+    <p id="msg"></p>
 
     <script type="text/javascript">
-      document.getElementById("openInAppLink").onclick = function (event) {
-        event.preventDefault();
-
+      document.addEventListener("DOMContentLoaded", () => {
+        const msg = document.getElementById("msg")
         var appScheme = "xkdemo://xinku78.github.io/demo";
         var fallbackUrl = "./app-release.apk"; // Replace with your app's Play Store URL
         var timeout;
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var isAndroid = /android/i.test(userAgent);
 
         // Function to check if the app is installed
         var checkIfInstalled = function () {
@@ -35,7 +43,7 @@
           iframe.src = appScheme;
 
           // Append the iframe to the body
-          document.body.appendChild(iframe);
+          // document.body.appendChild(iframe);
 
           // Remove the iframe after a short delay
           window.setTimeout(function () {
@@ -48,17 +56,21 @@
           window.location.href = fallbackUrl;
         };
 
-        // Set the timeout for the fallback action
+        if(isAndroid){
         timeout = setTimeout(handleFallback, 1500); // Adjust the timeout value if needed
 
         // Attempt to open the app
         checkIfInstalled();
+        }else{
+          msg.innerText="Not Mobile"
+        }
+        
 
         // Clear the timeout if the app is opened successfully
         window.onblur = function () {
           clearTimeout(timeout);
         };
-      };
+      });
     </script>
   </body>
 </html>
