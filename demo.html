@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open in App</title>
+</head>
+<body>
+    <a id="openInAppLink" href="#">Open in app</a>
+
+    <script type="text/javascript">
+        document.getElementById('openInAppLink').onclick = function(event) {
+            event.preventDefault();
+
+            // Replace with your app's custom URL scheme
+            var appScheme = "xkdemo://xinku78.github.io/demo";
+
+            // Try to open the app
+            window.location.href = appScheme;
+        };
+    </script>
+</body>
+</html>

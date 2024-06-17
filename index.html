@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
-  </head>
-  <style>
-    h2 {
-      font-size: 36px;
-      text-align: center;
-    }
-    #msg {
-      font-size: 18px;
-      text-align: center;
-      color: red;
-      font-weight: 700;
-    }
-  </style>
-  <body>
+    <style>
+        h2 {
+            font-size: 36px;
+            text-align: center;
+        }
+        #msg {
+            font-size: 18px;
+            text-align: center;
+            color: red;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
     <h2>Demo Application</h2>
     <p id="msg"></p>
 
     <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", () => {
-        const msg = document.getElementById("msg")
-        var appScheme = "xkdemo://xinku78.github.io/demo";
-        var fallbackUrl = "./app-release.apk"; // Replace with your app's Play Store URL
-        var timeout;
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        var isAndroid = /android/i.test(userAgent);
+        document.addEventListener("DOMContentLoaded", () => {
+            const msg = document.getElementById("msg");
+            var appScheme = "xkdemo://xinku78.github.io/demo";
+            var fallbackUrl = "./app-release.apk"; // Replace with your app's Play Store URL
+            var timeout;
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /android/i.test(userAgent);
 
-        // Function to check if the app is installed
-        var checkIfInstalled = function () {
-          // Create an invisible iframe to attempt to load the custom URL scheme
-          var iframe = document.createElement("iframe");
-          iframe.style.border = "none";
-          iframe.style.width = "1px";
-          iframe.style.height = "1px";
-          iframe.style.position = "absolute";
-          iframe.style.top = "0";
-          iframe.style.left = "0";
-          iframe.src = appScheme;
+            // Function to check if the app is installed
+            var checkIfInstalled = function () {
+                // Create an invisible iframe to attempt to load the custom URL scheme
+                var iframe = document.createElement("iframe");
+                iframe.style.border = "none";
+                iframe.style.width = "1px";
+                iframe.style.height = "1px";
+                iframe.style.position = "absolute";
+                iframe.style.top = "0";
+                iframe.style.left = "0";
+                iframe.src = appScheme;
 
-          // Append the iframe to the body
-          document.body.appendChild(iframe);
+                // Append the iframe to the body
+                document.body.appendChild(iframe);
 
-          // Remove the iframe after a short delay
-          window.setTimeout(function () {
-            document.body.removeChild(iframe);
-          }, 1000);
-        };
+                // Remove the iframe after a short delay
+                window.setTimeout(function () {
+                    document.body.removeChild(iframe);
+                }, 1000);
+            };
 
-        // Function to handle the fallback
-        var handleFallback = function () {
-          window.location.href = fallbackUrl;
-        };
+            // Function to handle the fallback
+            var handleFallback = function () {
+                msg.innerText = "Opening fallback URL...";
+                window.location.href = fallbackUrl;
+            };
 
-        if(isAndroid){
-        timeout = setTimeout(handleFallback, 1500); // Adjust the timeout value if needed
+            if (isAndroid) {
+                timeout = setTimeout(handleFallback, 1500); // Adjust the timeout value if needed
 
-        // Attempt to open the app
-        checkIfInstalled();
-        }else{
-          msg.innerText="Not Mobile"
-        }
-        
+                // Attempt to open the app
+                checkIfInstalled();
+            } else {
+                msg.innerText = "Not Mobile";
+            }
 
-        // Clear the timeout if the app is opened successfully
-        window.onblur = function () {
-          clearTimeout(timeout);
-        };
-      });
+            // Clear the timeout if the app is opened successfully
+            window.onblur = function () {
+                clearTimeout(timeout);
+            };
+        });
     </script>
-  </body>
+</body>
 </html>
