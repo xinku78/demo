@@ -63,7 +63,7 @@
         }
         // Function to check if the app is installed
         var checkIfInstalled = function () {
-          window.location.href = appScheme; // Attempt to open the app directly
+          window.location.href = appScheme; 
         };
         
 
@@ -74,10 +74,10 @@
         };
 
         if (isAndroid) {
+          checkIfInstalled();
           timeout = setTimeout(handleFallback, 3000); // Adjust the timeout value if needed
 
           // Attempt to open the app
-          checkIfInstalled();
         } else {
           msg.innerText = "Error: Try on mobile";
         }
